@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">TCamera</string>
+
+    <string name="imgly_camera_preview_hdr_on">HDR ON</string>
+    <string name="imgly_camera_preview_hdr_off">HDR OFF</string>
+
+    <string name="imgly_camera_preview_flash_auto">AUTO</string>
+    <string name="imgly_camera_preview_flash_on">ON</string>
+    <string name="imgly_camera_preview_flash_off">OFF</string>
+    <string name="imgly_color_filter_name_default">NONE</string>
+
 </resources>
