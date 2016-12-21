@@ -279,6 +279,14 @@ public abstract class ImageFilter extends AbstractConfig implements AbstractConf
         mHandleMap.put(name, location);
         return location;
     }
+    public Bitmap renderImage(Bitmap bitmap, boolean previewRendering) {
+        return this.renderImage(bitmap, 1.0F, previewRendering);
+    }
+
+    @Nullable
+    public Bitmap renderImage(Bitmap bitmap, float intensity, boolean previewRendering) {
+        return bitmap;
+    }
 
     @Override
     public int getLayout() {
@@ -299,5 +307,7 @@ public abstract class ImageFilter extends AbstractConfig implements AbstractConf
         }
         return bitmap;
     }
+
+
 
 }

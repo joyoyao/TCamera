@@ -2,8 +2,8 @@ package com.abcew.camera;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.renderscript.RenderScript;
 import android.support.annotation.NonNull;
+import android.support.v8.renderscript.RenderScript;
 import android.util.Log;
 
 import com.abcew.camera.ui.utilities.OrientationSensor;
