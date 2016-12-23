@@ -23,6 +23,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets { main { renderscript.srcDirs = ['src/main/rs', 'src/main/rs/'] } }
 }
 
 dependencies {
