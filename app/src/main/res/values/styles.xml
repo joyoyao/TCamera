@@ -306,4 +306,12 @@
     <style name="Imgly.Editor.Toolbar.Panels.Filter.ItemSelectOverlay" parent="Imgly.Editor.Toolbar.Panels.default.ItemSelectOverlay">
         <item name="android:background">@drawable/imgly_item_filter_overlay</item>
     </style>
+
+    <style name="AppThemeFullscreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
 </resources>
