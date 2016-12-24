@@ -16,10 +16,10 @@ import android.support.v8.renderscript.Element;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.ScriptIntrinsic3DLUT;
 import android.support.v8.renderscript.Type;
+import android.util.Log;
 
 import com.abcew.camera.ImgLySdk;
 import com.abcew.camera.ScriptC_image_alpha;
-import com.abcew.camera.ScriptC_image_translate_3d;
 import com.abcew.camera.utils.BitmapFactoryUtils;
 import com.abcew.camera.utils.ThreadUtils;
 
@@ -378,17 +378,51 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
         tb.setX(RED_DIM);
         tb.setY(GREEN_DIM);
         tb.setZ(BLUE_DIM);
+
+
+        int[] lut;
+
+        int redDim, greenDim, blueDim;
+        int w, h;
+
+        w = lutBitmap.getWidth();
+        h = lutBitmap.getHeight();
+        redDim = w / h;
+        greenDim = redDim;
+        blueDim = redDim;
+        int[] pixels = new int[w * h];
+        lut = new int[w * h];
+        lutBitmap.getPixels(pixels, 0, w, 0, 0, w, h);
+        int i = 0;
+
+        for (int r = 0; r < redDim; r++) {
+            for (int g = 0; g < greenDim; g++) {
+                int p = r + g * w;
+                for (int b = 0; b < blueDim; b++) {
+                    lut[i++] = pixels[p + b * h];
+                }
+            }
+        }
+
+//        tb.setX(redDim).setY(greenDim).setZ(blueDim);
+        tb.setX(redDim).setY(greenDim).setZ(blueDim);
+
         Allocation mAllocCube = Allocation.createTyped(rs, tb.create());
 
-        ScriptC_image_translate_3d script = new ScriptC_image_translate_3d(rs);
-        script.set_gIn(mAllocIn);
-        script.set_gOut(mAllocOut);
-        //Invoke script
-        script.forEach_root(mAllocIn, mAllocOut);
 
-        byte[] lut    = new byte[512 * 512 * 4];
-        mAllocOut.copyTo(lut);
+
         mAllocCube.copyFromUnchecked(lut);
+
+//        ScriptC_image_translate_3d script = new ScriptC_image_translate_3d(rs);
+//        script.set_gIn(mAllocIn);
+//        script.set_gOut(mAllocOut);
+//        //Invoke script
+//        script.forEach_root(mAllocIn, mAllocOut);
+//
+//        byte[] lut    = new byte[512 * 512 * 4];
+//        mAllocOut.copyTo(lut);
+//        mAllocCube.copyFromUnchecked(lut);
+        Log.i("tag","ScriptC_image_translate_3d");
 
         return mAllocCube;
     }
@@ -437,6 +471,8 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
             scriptC_image_alpha.set_gOut(allocBlend);
             scriptC_image_alpha.forEach_setImageAlpha(allocIn,allocBlend);
             allocBlend.copyTo(blend);
+
+            Log.i("tag","ScriptC_image_alpha");
 //            scriptC_image_alpha.forEach_setImageAlpha();
 //            scriptC_image_alpha.forEach_setImageAlpha(allocBlend);
             //allocOut.copyTo(output);
