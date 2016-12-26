@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
-import com.abcew.camera.ImgLySdk;
+import com.abcew.camera.ImgSdk;
 import com.abcew.camera.R;
 import com.abcew.camera.configuration.AbstractConfig;
 import com.abcew.camera.gles.OpenGLES;
@@ -125,7 +125,7 @@ public abstract class ImageFilter extends AbstractConfig implements AbstractConf
     }
 
     public ImageFilter(@StringRes int name, @DrawableRes int drawableId, @StringRes final int vertexShaderSourceResId, @StringRes final int fragmentShaderSourceResId) {
-        this(name, drawableId, ImgLySdk.getAppResource().getString(vertexShaderSourceResId), ImgLySdk.getAppResource().getString(fragmentShaderSourceResId));
+        this(name, drawableId, ImgSdk.getAppResource().getString(vertexShaderSourceResId), ImgSdk.getAppResource().getString(fragmentShaderSourceResId));
     }
 
     public ImageFilter(@StringRes int name, @DrawableRes int drawableId, final String vertexShaderSource, final String fragmentShaderSource) {
@@ -290,7 +290,7 @@ public abstract class ImageFilter extends AbstractConfig implements AbstractConf
 
     @Override
     public int getLayout() {
-        return R.layout.imgly_list_item_filter;
+        return R.layout.list_item_filter;
     }
 
     @Override
@@ -300,10 +300,10 @@ public abstract class ImageFilter extends AbstractConfig implements AbstractConf
 
     @Override
     public Bitmap getThumbnailBitmap(int maxWidth) {
-        Resources res = ImgLySdk.getAppResource();
+        Resources res = ImgSdk.getAppResource();
         Bitmap bitmap = ImageLoadOperation.getThumbnailBitmap((int) (56 * res.getDisplayMetrics().density));
         if(bitmap == null){
-            bitmap = BitmapFactoryUtils.decodeResource(res, R.drawable.imgly_filter_preview_photo);
+            bitmap = BitmapFactoryUtils.decodeResource(res, R.drawable.filter_preview_photo);
         }
         return bitmap;
     }

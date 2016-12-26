@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterFood extends LutColorFilter {
 
     public ColorFilterFood() {
-        super(R.string.imgly_color_filter_name_food, R.drawable.imgly_filter_preview_photo,R.drawable.imgly_lut_food);
+        super(R.string.color_filter_name_food, R.drawable.filter_preview_photo,R.drawable.lut_food);
     }
 }

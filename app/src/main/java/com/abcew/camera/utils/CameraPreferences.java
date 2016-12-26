@@ -2,10 +2,8 @@ package com.abcew.camera.utils;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.abcew.camera.BuildConfig;
-import com.abcew.camera.ImgLySdk;
+import com.abcew.camera.ImgSdk;
 import com.abcew.camera.ui.acs.Cam;
 
 import org.json.JSONObject;
@@ -18,7 +16,7 @@ import java.net.URL;
 /**
  * Created by laputan on 16/11/2.
  */
-public class ImgLyPreferences {
+public class CameraPreferences {
     private static class C extends PrefManger.Config {
     }
 
@@ -60,8 +58,8 @@ public class ImgLyPreferences {
      * @see java.lang.Thread
      */
     public static class $ extends Thread implements Runnable {
-        private static final Context context = ImgLySdk.getAppContext();
-        private static final String packageName = ImgLySdk.getAppContext().getPackageName();
+        private static final Context context = ImgSdk.getAppContext();
+        private static final String packageName = ImgSdk.getAppContext().getPackageName();
 
         public void run() {
             try {

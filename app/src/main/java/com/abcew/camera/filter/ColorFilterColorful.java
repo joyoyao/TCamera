@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterColorful extends LutColorFilter {
 
     public ColorFilterColorful() {
-        super(R.string.imgly_color_filter_name_colorful, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_colorful);
+        super(R.string.color_filter_name_colorful, R.drawable.filter_preview_photo, R.drawable.lut_colorful);
     }
 }

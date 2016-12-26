@@ -4,7 +4,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.abcew.camera.ImgLySdk;
+import com.abcew.camera.ImgSdk;
 
 import java.util.Set;
 
@@ -20,7 +20,7 @@ public class PrefManger<T> {
 
     private PrefManger() {
         if (preferences == null) {
-            preferences = ImgLySdk.getAppContext().getSharedPreferences(PREFERENCES_NAME, 0);
+            preferences = ImgSdk.getAppContext().getSharedPreferences(PREFERENCES_NAME, 0);
         }
     }
 

@@ -4,14 +4,14 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="transparent">#00000000</color>
-    <color name="imgly_preview_header_background">#27FFFFFF</color>
-    <color name="imgly_preview_text_color">#FFFFFF</color>
-    <color name="imgly_text_color">#000000</color>
-    <color name="imgly_editor_text_color">@color/imgly_text_color</color>
-    <color name="imgly_editor_toolbar_background">#FF666666</color>
-    <color name="imgly_editor_header_background">#FFCCCCCC</color>
-    <color name="imgly_button_color">#00FFFFFF</color>
-    <color name="imgly_button_pressed_color">#FF777777</color>
-    <color name="imgly_button_disabled_color">#66CCCCCC</color>
+    <color name="preview_header_background">#27FFFFFF</color>
+    <color name="preview_text_color">#FFFFFF</color>
+    <color name="text_color">#000000</color>
+    <color name="editor_text_color">@color/text_color</color>
+    <color name="editor_toolbar_background">#FF666666</color>
+    <color name="editor_header_background">#FFCCCCCC</color>
+    <color name="button_color">#00FFFFFF</color>
+    <color name="button_pressed_color">#FF777777</color>
+    <color name="button_disabled_color">#66CCCCCC</color>
 
 </resources>

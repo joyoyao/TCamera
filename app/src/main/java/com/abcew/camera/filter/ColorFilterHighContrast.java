@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterHighContrast extends LutColorFilter {
 
     public ColorFilterHighContrast() {
-        super(R.string.imgly_color_filter_name_highcontrast, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_highcontrast);
+        super(R.string.color_filter_name_highcontrast, R.drawable.filter_preview_photo, R.drawable.lut_highcontrast);
     }
 }

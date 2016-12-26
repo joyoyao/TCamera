@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterLitho extends LutColorFilter  {
 
     public ColorFilterLitho() {
-        super(R.string.imgly_color_filter_name_litho, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_litho);
+        super(R.string.color_filter_name_litho, R.drawable.filter_preview_photo, R.drawable.lut_litho);
     }
 }

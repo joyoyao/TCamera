@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterCreamy extends LutColorFilter {
 
     public ColorFilterCreamy() {
-        super(R.string.imgly_color_filter_name_creamy, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_creamy);
+        super(R.string.color_filter_name_creamy, R.drawable.filter_preview_photo, R.drawable.lut_creamy);
     }
 }

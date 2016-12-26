@@ -9,7 +9,7 @@ import android.view.OrientationEventListener;
 import android.view.Surface;
 import android.view.WindowManager;
 
-import com.abcew.camera.ImgLySdk;
+import com.abcew.camera.ImgSdk;
 import com.abcew.camera.utils.CallSet;
 
 /**
@@ -149,7 +149,7 @@ public class OrientationSensor extends OrientationEventListener {
                 return true;
             case SENSOR_WHEN_ROTATION_ENABLED:
                 return 0 == Settings.System.getInt(
-                        ImgLySdk.getAppContext().getContentResolver(),
+                        ImgSdk.getAppContext().getContentResolver(),
                         Settings.System.ACCELEROMETER_ROTATION,
                         0
                 );
@@ -161,7 +161,7 @@ public class OrientationSensor extends OrientationEventListener {
     @NonNull
     private ScreenOrientation getSystemOrientation() {
         return ScreenOrientation.fromSurfaceOrientation(Settings.System.getInt(
-                ImgLySdk.getAppContext().getContentResolver(),
+                ImgSdk.getAppContext().getContentResolver(),
                 Settings.System.USER_ROTATION,
                 0
         ));
@@ -169,7 +169,7 @@ public class OrientationSensor extends OrientationEventListener {
 
     public static int getDeviceDefaultOrientation() {
         if (defaultOrientationOffset == -1) {
-            Context context = ImgLySdk.getAppContext();
+            Context context = ImgSdk.getAppContext();
 
             WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 

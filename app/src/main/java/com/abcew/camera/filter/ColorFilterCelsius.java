@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterCelsius extends LutColorFilter {
 
     public ColorFilterCelsius() {
-        super(R.string.imgly_color_filter_name_celsius, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_celsius);
+        super(R.string.color_filter_name_celsius, R.drawable.filter_preview_photo, R.drawable.lut_celsius);
     }
 }

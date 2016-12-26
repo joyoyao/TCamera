@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterEvening extends LutColorFilter  {
 
     public ColorFilterEvening() {
-        super(R.string.imgly_color_filter_name_evening, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_evening);
+        super(R.string.color_filter_name_evening, R.drawable.filter_preview_photo, R.drawable.lut_evening);
     }
 }

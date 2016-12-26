@@ -8,6 +8,6 @@ import com.abcew.camera.R;
 
 public class ColorFilterEighties extends LutColorFilter {
     public ColorFilterEighties() {
-        super(R.string.imgly_color_filter_name_eighties, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_eighties);
+        super(R.string.color_filter_name_eighties, R.drawable.filter_preview_photo, R.drawable.lut_eighties);
     }
 }

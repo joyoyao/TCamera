@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterFall extends LutColorFilter {
 
     public ColorFilterFall() {
-        super(R.string.imgly_color_filter_name_fall, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_fall);
+        super(R.string.color_filter_name_fall, R.drawable.filter_preview_photo, R.drawable.lut_fall);
     }
 }

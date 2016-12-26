@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            style="@style/Imgly.Preview.Header">
+            style="@style/Preview.Header">
             <!--ly.img.android.ui.widgets.AutoRotateLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_centerInParent="true"
-                    style="@style/Imgly.Preview.Header.Button.FlashButton"
+                    style="@style/Preview.Header.Button.FlashButton"
                     />
             </ly.img.android.ui.widgets.AutoRotateLayout-->
             <Button
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_alignParentLeft="true"
-                style="@style/Imgly.Preview.Header.Button.FlashButton"
+                style="@style/Preview.Header.Button.FlashButton"
                 />
             <!--ly.img.android.ui.widgets.AutoRotateLayout
                 android:layout_width="wrap_content"
@@ -77,14 +77,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_centerInParent="true"
-                    style="@style/Imgly.Preview.Header.Button.HDRButton"/>
+                    style="@style/Preview.Header.Button.HDRButton"/>
             </ly.img.android.ui.widgets.AutoRotateLayout-->
             <ToggleButton
                 android:id="@+id/hdrButton"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
-                style="@style/Imgly.Preview.Header.Button.HDRButton"/>
+                style="@style/Preview.Header.Button.HDRButton"/>
             <com.abcew.camera.ui.widgets.AutoRotateLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_centerInParent="true"
-                    style="@style/Imgly.Preview.Header.Button.SwitchCameraButton"/>
+                    style="@style/Preview.Header.Button.SwitchCameraButton"/>
             </com.abcew.camera.ui.widgets.AutoRotateLayout>
         </RelativeLayout>
 
@@ -114,7 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            style="@style/Imgly.Preview.Footer"
+            style="@style/Preview.Footer"
             android:clipToPadding="false"
             android:clipChildren="false">
 

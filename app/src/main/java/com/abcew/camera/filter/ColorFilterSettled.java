@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterSettled extends LutColorFilter  {
 
     public ColorFilterSettled() {
-        super(R.string.imgly_color_filter_name_settled, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_settled);
+        super(R.string.color_filter_name_settled, R.drawable.filter_preview_photo, R.drawable.lut_settled);
     }
 }

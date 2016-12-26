@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterLucid extends LutColorFilter {
 
     public ColorFilterLucid() {
-        super(R.string.imgly_color_filter_name_lucid, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_lucid);
+        super(R.string.color_filter_name_lucid, R.drawable.filter_preview_photo, R.drawable.lut_lucid);
     }
 }

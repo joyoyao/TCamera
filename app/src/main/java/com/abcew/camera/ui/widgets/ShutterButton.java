@@ -28,7 +28,7 @@ public class ShutterButton extends Button implements View.OnClickListener{
 
     public ShutterButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        setBackgroundResource(R.drawable.imgly_button_shutter_pressed_animation);
+        setBackgroundResource(R.drawable.button_shutter_pressed_animation);
         frameAnimation = (AnimationDrawable) getBackground();
     }
 

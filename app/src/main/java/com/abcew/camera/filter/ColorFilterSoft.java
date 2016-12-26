@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterSoft extends LutColorFilter {
 
     public ColorFilterSoft() {
-        super(R.string.imgly_color_filter_name_soft, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_soft);
+        super(R.string.color_filter_name_soft, R.drawable.filter_preview_photo, R.drawable.lut_soft);
     }
 }

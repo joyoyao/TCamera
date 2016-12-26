@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterKeen extends LutColorFilter {
 
     public ColorFilterKeen() {
-        super(R.string.imgly_color_filter_name_keen, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_keen);
+        super(R.string.color_filter_name_keen, R.drawable.filter_preview_photo, R.drawable.lut_keen);
     }
 }

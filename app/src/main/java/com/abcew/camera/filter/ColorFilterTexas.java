@@ -10,6 +10,6 @@ public class ColorFilterTexas extends LutColorFilter  {
 
 
     public ColorFilterTexas() {
-        super(R.string.imgly_color_filter_name_texas, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_texas);
+        super(R.string.color_filter_name_texas, R.drawable.filter_preview_photo, R.drawable.lut_texas);
     }
 }

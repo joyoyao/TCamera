@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--item>
+    <item>
         <shape>
             <padding android:top="0dp" android:right="0.5dp" android:bottom="0.5dp" android:left="0dp" />
             <solid android:color="#14000000" />
@@ -15,12 +15,12 @@
             <solid android:color="#14000000" />
             <corners android:radius="3.5dp"/>
         </shape>
-    </item-->
+    </item>
     <item>
         <shape>
             <padding android:top="3dp" android:right="3dp" android:bottom="3dp" android:left="3dp" />
-            <solid android:color="@color/imgly_button_color" />
             <corners android:radius="3.5dp"/>
+            <solid android:color="@color/button_disabled_color"/>
         </shape>
     </item>
 </layer-list>

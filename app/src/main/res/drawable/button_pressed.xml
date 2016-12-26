@@ -19,7 +19,7 @@
     <item>
         <shape>
             <padding android:top="3dp" android:right="3dp" android:bottom="3dp" android:left="3dp" />
-            <solid android:color="@color/imgly_button_pressed_color" />
+            <solid android:color="@color/button_pressed_color" />
             <corners android:radius="3.5dp"/>
         </shape>
     </item>

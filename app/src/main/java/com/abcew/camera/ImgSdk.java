@@ -2,6 +2,7 @@ package com.abcew.camera;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v8.renderscript.RenderScript;
 import android.util.Log;
@@ -11,7 +12,7 @@ import com.abcew.camera.ui.utilities.OrientationSensor;
 /**
  * Created by laputan on 16/10/31.
  */
-public class ImgLySdk {
+public class ImgSdk {
     private static Context instance;
 
     /**
@@ -35,13 +36,13 @@ public class ImgLySdk {
     @NonNull
     public static Context getAppContext() {
         if (instance == null) {
-            throw new RuntimeException("Please Call ImgLySdk init() in Application onCreate");
+            throw new RuntimeException("Please Call ImgSdk init() in Application onCreate");
         }
         return instance;
     }
 
     public static RenderScript getAppRsContext() {
-        RenderScript rs = RenderScript.create(ImgLySdk.getAppContext());
+        RenderScript rs = RenderScript.create(ImgSdk.getAppContext());
         rs.setPriority(RenderScript.Priority.LOW);
         rs.setErrorHandler(new RsError());
         rs.setMessageHandler(new RsMassage());
@@ -75,12 +76,17 @@ public class ImgLySdk {
         if (instance != null) {
             return instance.getResources();
         } else {
-            Log.e("ImgLySdk", "Please Call ImgLySdk init() in Application onCreate");
-            //throw new RuntimeException("Please Call ImgLySdk init() in Application onCreate");
+            Log.e("ImgSdk", "Please Call ImgSdk init() in Application onCreate");
+            //throw new RuntimeException("Please Call ImgSdk init() in Application onCreate");
             return Resources.getSystem();
         }
     }
 
+    public static String getExportPrefix() {
 
-
+        return "image_";
+    }
+    protected static String getExportPath() {
+            return   Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
+    }
 }

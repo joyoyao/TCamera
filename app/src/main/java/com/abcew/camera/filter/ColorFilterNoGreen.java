@@ -10,6 +10,6 @@ public class ColorFilterNoGreen extends LutColorFilter {
 
 
     public ColorFilterNoGreen() {
-        super(R.string.imgly_color_filter_name_nogreen, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_nogreen);
+        super(R.string.color_filter_name_nogreen, R.drawable.filter_preview_photo, R.drawable.lut_nogreen);
     }
 }

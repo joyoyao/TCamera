@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterLomo extends LutColorFilter {
 
     public ColorFilterLomo() {
-        super(R.string.imgly_color_filter_name_lomo, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_lomo);
+        super(R.string.color_filter_name_lomo, R.drawable.filter_preview_photo, R.drawable.lut_lomo);
     }
 }

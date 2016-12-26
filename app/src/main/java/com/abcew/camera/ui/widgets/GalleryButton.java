@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.ImageButton;
 
-import com.abcew.camera.ImgLySdk;
+import com.abcew.camera.ImgSdk;
 import com.abcew.camera.ui.utilities.PermissionRequest;
 import com.abcew.camera.utils.BitmapFactoryUtils;
 import com.abcew.camera.utils.ExifUtils;
@@ -84,7 +84,7 @@ public class GalleryButton extends ImageButton implements PermissionRequest.Resp
                     MediaStore.Images.ImageColumns.MIME_TYPE
             };
 
-            final Cursor cursor = ImgLySdk.getAppContext().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC");
+            final Cursor cursor = ImgSdk.getAppContext().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC");
 
             // Put it in the image view
             if(cursor != null && cursor.getCount() > 0){

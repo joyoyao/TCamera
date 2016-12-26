@@ -18,7 +18,7 @@ import android.support.v8.renderscript.ScriptIntrinsic3DLUT;
 import android.support.v8.renderscript.Type;
 import android.util.Log;
 
-import com.abcew.camera.ImgLySdk;
+import com.abcew.camera.ImgSdk;
 import com.abcew.camera.ScriptC_image_alpha;
 import com.abcew.camera.utils.BitmapFactoryUtils;
 import com.abcew.camera.utils.ThreadUtils;
@@ -44,7 +44,7 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
 
     private static final float MAX_MEMORY_PERCENTAGE = 0.15f;
 
-    private static RenderScript rs = ImgLySdk.getAppRsContext();
+    private static RenderScript rs = ImgSdk.getAppRsContext();
 
     private static class Scripts {
         @Nullable
@@ -143,7 +143,7 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
         intensityPaint.setAntiAlias(false);
         intensityPaint.setFilterBitmap(false);
 
-        resources = ImgLySdk.getAppResource();
+        resources = ImgSdk.getAppResource();
         lutResourceId = lutResource;
     }
 
@@ -274,7 +274,7 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
         Bitmap outputBitmap = null;//getLastRender(this);
         if (outputBitmap == null) {
 
-            rs = ImgLySdk.getAppRsContext();
+            rs = ImgSdk.getAppRsContext();
 
             ScriptIntrinsic3DLUT scriptLut = getLutRenderScript();
 
@@ -368,50 +368,46 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
                 } catch (InterruptedException ignored) {}
             }
         }
+//        Bitmap cache = Bitmap.createBitmap(512,512, Bitmap.Config.ARGB_8888);
+//        Allocation mAllocIn  = Allocation.createFromBitmap(rs, lutBitmap);
+//        Allocation mAllocOut = Allocation.createFromBitmap(rs, cache);
 
-        Bitmap cache = Bitmap.createBitmap(512,512, Bitmap.Config.ARGB_8888);
+//        tb.setX(RED_DIM);
+//        tb.setY(GREEN_DIM);
+//        tb.setZ(BLUE_DIM);
 
-        Allocation mAllocIn  = Allocation.createFromBitmap(rs, lutBitmap);
-        Allocation mAllocOut = Allocation.createFromBitmap(rs, cache);
-
-        final Type.Builder tb = new Type.Builder(rs, Element.U8_4(rs));
-        tb.setX(RED_DIM);
-        tb.setY(GREEN_DIM);
-        tb.setZ(BLUE_DIM);
-
-
-        int[] lut;
-
-        int redDim, greenDim, blueDim;
-        int w, h;
-
-        w = lutBitmap.getWidth();
-        h = lutBitmap.getHeight();
-        redDim = w / h;
-        greenDim = redDim;
-        blueDim = redDim;
-        int[] pixels = new int[w * h];
-        lut = new int[w * h];
-        lutBitmap.getPixels(pixels, 0, w, 0, 0, w, h);
-        int i = 0;
-
-        for (int r = 0; r < redDim; r++) {
-            for (int g = 0; g < greenDim; g++) {
-                int p = r + g * w;
-                for (int b = 0; b < blueDim; b++) {
-                    lut[i++] = pixels[p + b * h];
-                }
-            }
-        }
-
+//        int[] lut;
+//
+//        int redDim, greenDim, blueDim;
+//        int w, h;
+//
+//        w = lutBitmap.getWidth();
+//        h = lutBitmap.getHeight();
+//        redDim = w / h;
+//        greenDim = redDim;
+//        blueDim = redDim;
+//        int[] pixels = new int[w * h];
+//        lut = new int[w * h];
+//        lutBitmap.getPixels(pixels, 0, w, 0, 0, w, h);
+//        int i = 0;
+//
+//        for (int r = 0; r < redDim; r++) {
+//            for (int g = 0; g < greenDim; g++) {
+//                int p = r + g * w;
+//                for (int b = 0; b < blueDim; b++) {
+//                    lut[i++] = pixels[p + b * h];
+//                }
+//            }
+//        }
+//         Type.Builder tb = new Type.Builder(rs, Element.U8_4(rs));
+//
+////        tb.setX(redDim).setY(greenDim).setZ(blueDim);
 //        tb.setX(redDim).setY(greenDim).setZ(blueDim);
-        tb.setX(redDim).setY(greenDim).setZ(blueDim);
-
-        Allocation mAllocCube = Allocation.createTyped(rs, tb.create());
-
-
-
-        mAllocCube.copyFromUnchecked(lut);
+//
+//
+//
+//
+//        mAllocCube.copyFromUnchecked(lut);
 
 //        ScriptC_image_translate_3d script = new ScriptC_image_translate_3d(rs);
 //        script.set_gIn(mAllocIn);
@@ -423,7 +419,40 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
 //        mAllocOut.copyTo(lut);
 //        mAllocCube.copyFromUnchecked(lut);
         Log.i("tag","ScriptC_image_translate_3d");
+//
+        int redDim, greenDim, blueDim;
+        int w, h;
+        int[] lut;
+        w = lutBitmap.getWidth();
+        h = lutBitmap.getHeight();
+//                redDim = w / h;
+//                greenDim = redDim;
+//                blueDim = redDim;
 
+        redDim = greenDim = blueDim = 64;
+        int[] pixels = new int[w * h];
+        lut = new int[w * h];
+        lutBitmap.getPixels(pixels, 0, w, 0, 0, w, h);
+
+        int i = 0;
+        //512*512的查色表，根据b的大小，划分 8*8的小块
+        for (int r=0; r<redDim; r++){
+            for (int g=0; g<greenDim; g++){
+                for (int b=0; b<blueDim; b++){
+
+                    int blockX = b%8;
+                    int blockY = b/8;
+
+                    lut[i++] = pixels[(blockY * 64 + g) * 512 + (blockX * 64 + r)];
+                }
+            }
+        }
+
+        Type.Builder tb = new Type.Builder(rs, Element.U8_4(rs));
+        tb.setX(redDim).setY(greenDim).setZ(blueDim);
+        Allocation mAllocCube = Allocation.createTyped(rs, tb.create());
+
+        mAllocCube.copyFromUnchecked(lut);
         return mAllocCube;
     }
 

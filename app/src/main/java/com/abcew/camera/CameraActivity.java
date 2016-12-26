@@ -32,7 +32,7 @@ import com.abcew.camera.ui.widgets.GalleryButton;
 import com.abcew.camera.ui.widgets.GlCameraPreview;
 import com.abcew.camera.ui.widgets.HorizontalListView;
 import com.abcew.camera.ui.widgets.ShutterButton;
-import com.abcew.camera.utils.ImgLyPreferences;
+import com.abcew.camera.utils.CameraPreferences;
 
 import java.io.File;
 
@@ -40,7 +40,7 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
     public static final String RESULT_IMAGE_PATH = "RESULT_IMAGE_PATH";
 
     private static final int RESULT_EDITOR_DONE = 2;
-    private static final int RESULT_LOAD_IMAGE  = 1;
+    private static final int RESULT_LOAD_IMAGE = 1;
 
     private GlCameraPreview preview;
 
@@ -60,16 +60,14 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
 
     private View rootView;
 
-    private CameraPreviewIntent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-//        ImgLySdk.getAnalyticsPlugin().changeScreen("CameraPreview");
+//        ImgSdk.getAnalyticsPlugin().changeScreen("CameraPreview");
 
-        intent = new CameraPreviewIntent(getIntent(), this);
 
         initViews();
 
@@ -87,15 +85,16 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
         cameraView.post(new Runnable() {
             @Override
             public void run() {
-                cameraView.setCameraFacing(ImgLyPreferences.cameraFacing.get());
-                hdrToggleButton.setChecked(Cam.SCENE_MODE.HDR == cameraView.setSceneMode(ImgLyPreferences.isHDR.get() ? Cam.SCENE_MODE.HDR : Cam.SCENE_MODE.AUTO));
-                setFlashMode(ImgLyPreferences.flashMode.get());
+                cameraView.setCameraFacing(CameraPreferences.cameraFacing.get());
+                hdrToggleButton.setChecked(Cam.SCENE_MODE.HDR == cameraView.setSceneMode(CameraPreferences.isHDR.get() ? Cam.SCENE_MODE.HDR : Cam.SCENE_MODE.AUTO));
+                setFlashMode(CameraPreferences.flashMode.get());
             }
         });
     }
+
     private void initViews() {
 
-        cameraView  = (CamView) findViewById(R.id.cameraView);
+        cameraView = (CamView) findViewById(R.id.cameraView);
         ShutterButton shootButton = (ShutterButton) findViewById(R.id.shutterButton);
         GalleryButton galleryButton = (GalleryButton) findViewById(R.id.galleryButton);
         ImageButton cameraSwitchButton = (ImageButton) findViewById(R.id.switchCameraButton);
@@ -154,14 +153,14 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
 
     @Override
     public void onImageCaptured(String outputPath) {
-        if (intent.getOpenEditor()) {
+//        if (intent.getOpenEditor()) {
 //            PhotoEditorIntent editorIntent = new PhotoEditorIntent(intent.getEditorIntent(), this);
 //            editorIntent.setSourceImagePath(outputPath);
 //            editorIntent.setFilter(preview.getFilter());
 //            editorIntent.startActivityForResult(RESULT_EDITOR_DONE);
-        } else {
-            setResult(RESULT_OK);
-        }
+//        } else {
+//            setResult(RESULT_OK);
+//        }
     }
 
     @Override
@@ -176,9 +175,9 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
 
 
     public void onTakePicture(View button) {
-        final String filePrefix = intent.getExportPrefix();
+        final String filePrefix = ImgSdk.getExportPrefix();
 
-        File mMediaFolder = new File(intent.getExportPath());
+        File mMediaFolder = new File(ImgSdk.getExportPath());
         if (!mMediaFolder.exists()) {
             mMediaFolder.mkdirs(); //TODO: SD-Card Error Handling!
         }
@@ -190,16 +189,17 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
 
     public void onSwitchCamera(View switchButton) {
         final Cam.CAMERA_FACING facing;
-        switch (cameraView.getCameraFacing()){
+        switch (cameraView.getCameraFacing()) {
             case FRONT:
                 facing = cameraView.setCameraFacing(Cam.CAMERA_FACING.BACK);
                 break;
 
-            case BACK: default:
+            case BACK:
+            default:
                 facing = cameraView.setCameraFacing(Cam.CAMERA_FACING.FRONT);
                 break;
         }
-        ImgLyPreferences.cameraFacing.set(facing);
+        CameraPreferences.cameraFacing.set(facing);
     }
 
     public void onToggleFlashLight(Button flashButton) {
@@ -214,12 +214,13 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
                 mode = setFlashMode(Cam.FLASH_MODE.AUTO);
                 break;
 
-            case OFF: default:
+            case OFF:
+            default:
                 mode = setFlashMode(Cam.FLASH_MODE.ON);
                 break;
         }
 
-        ImgLyPreferences.flashMode.set(mode);
+        CameraPreferences.flashMode.set(mode);
     }
 
     public void onToggleHdr(ToggleButton hdrButton, boolean isChecked) {
@@ -249,8 +250,8 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
     @Override
     public void onCamViewResize(final int w, final int h) {
 
-        RectF camRect   = new RectF(0, 0, w, h);
-        RectF freeRect  = new RectF(0, actionBar.getHeight(), rootView.getWidth(), rootView.getHeight() - filterBar.getHeight());
+        RectF camRect = new RectF(0, 0, w, h);
+        RectF freeRect = new RectF(0, actionBar.getHeight(), rootView.getWidth(), rootView.getHeight() - filterBar.getHeight());
 
         float translateY = (freeRect.centerY() - camRect.centerY());
 
@@ -306,7 +307,7 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
     }
 
     public void onOpenGallery(GalleryButton button) {
-        android.content.Intent i = new android.content.Intent(android.content.Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        android.content.Intent i = new android.content.Intent(android.content.Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
 
@@ -315,7 +316,7 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
             Cursor cursor = getContentResolver().query(selectedImage,
                     filePathColumn, null, null, null);
 
@@ -326,24 +327,19 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
             cursor.moveToFirst();
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
 
-            if(columnIndex < 0) // no column index
+            if (columnIndex < 0) // no column index
                 return; // DO YOUR ERROR HANDLING
 
             String picturePath = cursor.getString(columnIndex);
 
             cursor.close();
 
-            if (intent.getOpenEditor()) {
-//                PhotoEditorIntent editorIntent = new PhotoEditorIntent(intent.getEditorIntent(), this);
-//                editorIntent.setSourceImagePath(picturePath);
-//                editorIntent.startActivityForResult(RESULT_EDITOR_DONE);
-            } else {
-                Intent result = new Intent();
 
-                result.putExtra(RESULT_IMAGE_PATH, picturePath);
+            Intent result = new Intent();
 
-                setResult(RESULT_OK, result);
-            }
+            result.putExtra(RESULT_IMAGE_PATH, picturePath);
+
+            setResult(RESULT_OK, result);
 
         } else if (requestCode == RESULT_EDITOR_DONE) {
 
@@ -370,16 +366,16 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
 
                 switch (mode) {
                     case AUTO:
-                        label = resources.getString(R.string.imgly_camera_preview_flash_auto);
+                        label = resources.getString(R.string.camera_preview_flash_auto);
                         break;
 
                     case ON:
-                        label = resources.getString(R.string.imgly_camera_preview_flash_on);
+                        label = resources.getString(R.string.camera_preview_flash_on);
                         break;
 
                     case OFF:
                     default:
-                        label = resources.getString(R.string.imgly_camera_preview_flash_off);
+                        label = resources.getString(R.string.camera_preview_flash_off);
                         break;
                 }
 
@@ -387,11 +383,11 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
 
 
                 boolean isHDR = state.getSceneMode() == Cam.SCENE_MODE.HDR;
-                ImgLyPreferences.isHDR.set(isHDR);
+                CameraPreferences.isHDR.set(isHDR);
                 hdrToggleButton.setChecked(isHDR);
 
                 boolean hasHDRSupport = Build.VERSION.SDK_INT > 17 && cameraView.hasSceneMode(Camera.Parameters.SCENE_MODE_HDR);
-                hdrToggleButton.setVisibility(hasHDRSupport ? View.VISIBLE: View.INVISIBLE);
+                hdrToggleButton.setVisibility(hasHDRSupport ? View.VISIBLE : View.INVISIBLE);
             }
         });
 

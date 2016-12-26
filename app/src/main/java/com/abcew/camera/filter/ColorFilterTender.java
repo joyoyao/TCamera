@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterTender extends LutColorFilter {
 
     public ColorFilterTender() {
-        super(R.string.imgly_color_filter_name_tender, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_tender);
+        super(R.string.color_filter_name_tender, R.drawable.filter_preview_photo, R.drawable.lut_tender);
     }
 }

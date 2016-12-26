@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RawRes;
 import android.util.TypedValue;
 
-import com.abcew.camera.ImgLySdk;
+import com.abcew.camera.ImgSdk;
 
 /**
  * Created by laputan on 16/10/31.
@@ -83,7 +83,7 @@ public class BitmapFactoryUtils {
 
     /**
      * Decode a drawable or a raw image resource.
-     * @param res resources @see #ImgLySdk.getAppResource().
+     * @param res resources @see #ImgSdk.getAppResource().
      * @param resId resource id.
      * @param minSize minWidth the image must have.
      * @return the source resource image decoded with a minimum sample size.
@@ -151,7 +151,7 @@ public class BitmapFactoryUtils {
 
     /**
      * Decode a drawable or a raw image resource.
-     * @param res resources @see #ImgLySdk.getAppResource().
+     * @param res resources @see #ImgSdk.getAppResource().
      * @param resId resource id.
      * @return the source resource image in full size
      */
@@ -204,7 +204,7 @@ public class BitmapFactoryUtils {
 
     /*private static Bitmap setReplaceColor(Bitmap bitmap, final int startInSampleSize, final int add, final int multi) {
         Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        RenderScript rs = RenderScript.create(ImgLySdk.getAppContext());
+        RenderScript rs = RenderScript.create(ImgSdk.getAppContext());
         Allocation in = Allocation.createFromBitmap(rs, bitmap);
         Allocation out = Allocation.createFromBitmap(rs, output);
 
@@ -222,7 +222,7 @@ public class BitmapFactoryUtils {
     public static boolean checkIsSvgResource(@DrawableRes @RawRes int resourceID) {
         boolean isSvg;
         try {
-            final Resources resources = ImgLySdk.getAppResource();
+            final Resources resources = ImgSdk.getAppResource();
             final String resourceTypeName = resources.getResourceTypeName(resourceID);
 
             if (resourceTypeName.contains("raw")) {

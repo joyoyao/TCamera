@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterPola669 extends LutColorFilter {
 
     public ColorFilterPola669() {
-        super(R.string.imgly_color_filter_name_pola669, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_pola669);
+        super(R.string.color_filter_name_pola669, R.drawable.filter_preview_photo, R.drawable.lut_pola669);
     }
 }

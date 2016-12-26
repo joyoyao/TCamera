@@ -10,7 +10,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        ImgLySdk.init(this);
+        ImgSdk.init(this);
     }
 
 

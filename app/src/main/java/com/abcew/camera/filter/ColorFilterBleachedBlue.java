@@ -8,6 +8,6 @@ import com.abcew.camera.R;
 
 public class ColorFilterBleachedBlue extends LutColorFilter {
     public ColorFilterBleachedBlue() {
-        super(R.string.imgly_color_filter_name_bleachedblue, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_bleachedblue);
+        super(R.string.color_filter_name_bleachedblue, R.drawable.filter_preview_photo, R.drawable.lut_bleachedblue);
     }
 }

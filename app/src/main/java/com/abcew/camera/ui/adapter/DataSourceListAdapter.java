@@ -331,7 +331,7 @@ public class DataSourceListAdapter extends RecyclerView.Adapter<DataSourceListAd
             viewTypes = new HashMap<>();
 
             inflater = LayoutInflater.from(context);
-            View view = inflater.inflate(R.layout.imgly_list_item, this, true);
+            View view = inflater.inflate(R.layout.list_item, this, true);
             viewHolder = (ViewGroup) view.findViewById(R.id.multiViewHolder);
         }
 

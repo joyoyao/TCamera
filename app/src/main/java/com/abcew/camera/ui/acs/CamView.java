@@ -12,7 +12,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.abcew.camera.ImgLySdk;
+import com.abcew.camera.ImgSdk;
 import com.abcew.camera.configuration.AbstractConfig;
 import com.abcew.camera.configuration.PhotoEditorSdkConfig;
 import com.abcew.camera.ui.utilities.OrientationSensor;
@@ -273,7 +273,7 @@ public class CamView extends ViewGroup implements Cam.OnStateChangeListener, Ori
 
         linePaint.setColor(0xFFFFFFFF);
         linePaint.setStyle(Paint.Style.STROKE);
-        linePaint.setStrokeWidth(2 * ImgLySdk.getAppResource().getDisplayMetrics().density);
+        linePaint.setStrokeWidth(2 * ImgSdk.getAppResource().getDisplayMetrics().density);
         linePaint.setAntiAlias(true);
     }
 

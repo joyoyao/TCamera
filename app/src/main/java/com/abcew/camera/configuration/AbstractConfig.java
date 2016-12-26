@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.abcew.camera.ImgLySdk;
+import com.abcew.camera.ImgSdk;
 import com.abcew.camera.R;
 import com.abcew.camera.gles.Texture;
 import com.abcew.camera.ui.adapter.DataSourceListAdapter;
@@ -55,11 +55,11 @@ public class AbstractConfig implements DataSourceInterface<AbstractConfig.BindDa
     }
 
     protected AbstractConfig(@StringRes int name, @DrawableRes @RawRes int thumbnailRes) {
-        this(ImgLySdk.getAppResource().getString(name), thumbnailRes);
+        this(ImgSdk.getAppResource().getString(name), thumbnailRes);
     }
 
     protected AbstractConfig(@StringRes int name) {
-        this(ImgLySdk.getAppResource().getString(name), NO_THUMBNAIL_ID);
+        this(ImgSdk.getAppResource().getString(name), NO_THUMBNAIL_ID);
     }
 
     protected AbstractConfig(String name) {
@@ -130,7 +130,7 @@ public class AbstractConfig implements DataSourceInterface<AbstractConfig.BindDa
         @NonNull
         public final ImageView imageView;
 
-        //private static final int ICON_SIZE = Math.round(48 * ImgLySdk.getAppResource().getDisplayMetrics().density);
+        //private static final int ICON_SIZE = Math.round(48 * ImgSdk.getAppResource().getDisplayMetrics().density);
 
         public ConfigViewHolder(@NonNull View v) {
             super(v);
@@ -235,7 +235,7 @@ public class AbstractConfig implements DataSourceInterface<AbstractConfig.BindDa
             return null;
         }
 
-        Resources resources = ImgLySdk.getAppResource();
+        Resources resources = ImgSdk.getAppResource();
         return BitmapFactoryUtils.decodeResource(resources, thumbnailResId, minSize);
 
     }

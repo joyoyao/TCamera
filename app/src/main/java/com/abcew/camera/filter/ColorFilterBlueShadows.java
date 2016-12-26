@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterBlueShadows extends LutColorFilter {
 
     public ColorFilterBlueShadows() {
-        super(R.string.imgly_color_filter_name_blueshadows, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_blueshadows);
+        super(R.string.color_filter_name_blueshadows, R.drawable.filter_preview_photo, R.drawable.lut_blueshadows);
     }
 }

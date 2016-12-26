@@ -7,6 +7,6 @@ import com.abcew.camera.R;
  */
 public class NoneImageFilter extends ImageFilter {
     public NoneImageFilter() {
-        super(R.string.imgly_color_filter_name_default, R.drawable.imgly_filter_preview_photo);
+        super(R.string.color_filter_name_default, R.drawable.filter_preview_photo);
     }
 }

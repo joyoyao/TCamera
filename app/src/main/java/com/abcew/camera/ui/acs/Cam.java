@@ -13,7 +13,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.widget.Toast;
 
-import com.abcew.camera.ImgLySdk;
+import com.abcew.camera.ImgSdk;
 import com.abcew.camera.ui.utilities.OrientationSensor;
 import com.abcew.camera.utils.ExifUtils;
 import com.abcew.camera.utils.ThreadUtils;
@@ -269,7 +269,7 @@ public class Cam {
      * @return true if a Camera exists
      */
     public static synchronized boolean isAvailable() {
-        return ImgLySdk.getAppContext().getPackageManager().hasSystemFeature(Build.VERSION.SDK_INT > 17 ? PackageManager.FEATURE_CAMERA_ANY : PackageManager.FEATURE_CAMERA);
+        return ImgSdk.getAppContext().getPackageManager().hasSystemFeature(Build.VERSION.SDK_INT > 17 ? PackageManager.FEATURE_CAMERA_ANY : PackageManager.FEATURE_CAMERA);
     }
 
     /**
@@ -1059,7 +1059,7 @@ public class Cam {
                         @Override
                         @MainThread
                         public void run() {
-                            Toast.makeText(ImgLySdk.getAppContext(), "Camera Error",  Toast.LENGTH_LONG).show();
+                            Toast.makeText(ImgSdk.getAppContext(), "Camera Error",  Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -1130,7 +1130,7 @@ public class Cam {
             Camera camera = hasCam ? getCamInstance() : null;
 
             final int maxPreviewSizeLength = Math.min(maxTextureSize, maxRenderBufferSize);
-            final int screenSize = ImgLySdk.getAppResource().getDisplayMetrics().widthPixels * ImgLySdk.getAppResource().getDisplayMetrics().heightPixels;
+            final int screenSize = ImgSdk.getAppResource().getDisplayMetrics().widthPixels * ImgSdk.getAppResource().getDisplayMetrics().heightPixels;
 
             Camera.Parameters params = getParameters();
             if (previewSize == null && camera != null  && params != null && maxPreviewSizeLength > 0) {

@@ -53,7 +53,7 @@ public class CropAspectConfig extends AbstractConfig implements AbstractConfig.A
 
     @Override
     public int getLayout() {
-        return R.layout.imgly_list_item_crop;
+        return R.layout.list_item_crop;
     }
 
     @Override

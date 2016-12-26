@@ -9,6 +9,6 @@ import com.abcew.camera.R;
 public class ColorFilterKDynamic extends LutColorFilter  {
 
     public ColorFilterKDynamic() {
-        super(R.string.imgly_color_filter_name_kdynamic, R.drawable.imgly_filter_preview_photo, R.drawable.imgly_lut_kdynamic);
+        super(R.string.color_filter_name_kdynamic, R.drawable.filter_preview_photo, R.drawable.lut_kdynamic);
     }
 }

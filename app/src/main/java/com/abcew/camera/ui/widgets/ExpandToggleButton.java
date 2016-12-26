@@ -33,7 +33,7 @@ public class ExpandToggleButton extends ToggleButton implements View.OnClickList
     public ExpandToggleButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        setBackgroundResource(R.drawable.imgly_icon_show_filter);
+        setBackgroundResource(R.drawable.icon_show_filter);
 
         super.setOnClickListener(this);
         super.setOnCheckedChangeListener(this);
