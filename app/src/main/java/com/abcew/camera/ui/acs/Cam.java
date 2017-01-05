@@ -487,7 +487,7 @@ public class Cam {
                         Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
                         Bitmap outBitmap =  filterInterface.renderImage(bitmap);
                         orgStreamOutput = new FileOutputStream(outputPath);
-                        outBitmap.compress(Bitmap.CompressFormat.JPEG, 100, orgStreamOutput);
+                        outBitmap.compress(Bitmap.CompressFormat.JPEG, 85, orgStreamOutput);
                         orgStreamOutput.close();
                         if(bitmap!=null&&!bitmap.isRecycled()){
                             bitmap.recycle();
