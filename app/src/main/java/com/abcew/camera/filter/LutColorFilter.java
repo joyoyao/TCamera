@@ -439,10 +439,8 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
         for (int r=0; r<redDim; r++){
             for (int g=0; g<greenDim; g++){
                 for (int b=0; b<blueDim; b++){
-
                     int blockX = b%8;
                     int blockY = b/8;
-
                     lut[i++] = pixels[(blockY * 64 + g) * 512 + (blockX * 64 + r)];
                 }
             }

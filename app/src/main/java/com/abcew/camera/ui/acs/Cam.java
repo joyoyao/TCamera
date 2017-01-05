@@ -1,6 +1,8 @@
 package com.abcew.camera.ui.acs;
 
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
@@ -14,6 +16,8 @@ import android.view.SurfaceHolder;
 import android.widget.Toast;
 
 import com.abcew.camera.ImgSdk;
+import com.abcew.camera.configuration.AbstractConfig;
+import com.abcew.camera.filter.NoneImageFilter;
 import com.abcew.camera.ui.utilities.OrientationSensor;
 import com.abcew.camera.utils.ExifUtils;
 import com.abcew.camera.utils.ThreadUtils;
@@ -439,7 +443,7 @@ public class Cam {
      * @param callback Callback that fired after image will saved as jpg.
      * @param outputPath the output path for saving the image
      */
-    public void takePicture(final CamView.CaptureCallback callback, String outputPath) {
+    public void takePicture(final CamView.CaptureCallback callback, String outputPath, final AbstractConfig.ImageFilterInterface filterInterface) {
         if (captureCallback != null) {
             return;
         }
@@ -448,12 +452,12 @@ public class Cam {
         shoot(new Cam.PictureCallback(outputPath) {
             @Override
             public void onPictureTaken(byte[] data, Camera camera) {
-                Cam.this.onPictureTaken(data, this.getOutputPath());
+                Cam.this.onPictureTaken(data, this.getOutputPath(),filterInterface);
             }
         });
     }
 
-    private void onPictureTaken(@Nullable final byte[] data, @NonNull final String outputPath) {
+    private void onPictureTaken(@Nullable final byte[] data, @NonNull final String outputPath, final AbstractConfig.ImageFilterInterface filterInterface) {
         if (data == null) {
 
             Log.e("camera", "Camera picture is null");
@@ -475,9 +479,24 @@ public class Cam {
                 }
 
                 try {
-                    orgStreamOutput = new FileOutputStream(outputPath);
-                    orgStreamOutput.write(data);
-                    orgStreamOutput.close();
+                    if(filterInterface==null||filterInterface instanceof NoneImageFilter){
+                        orgStreamOutput = new FileOutputStream(outputPath);
+                        orgStreamOutput.write(data);
+                        orgStreamOutput.close();
+                    }else {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                        Bitmap outBitmap =  filterInterface.renderImage(bitmap);
+                        orgStreamOutput = new FileOutputStream(outputPath);
+                        outBitmap.compress(Bitmap.CompressFormat.JPEG, 100, orgStreamOutput);
+                        orgStreamOutput.close();
+                        if(bitmap!=null&&!bitmap.isRecycled()){
+                            bitmap.recycle();
+                        }
+                        if(outBitmap!=null&&!outBitmap.isRecycled()){
+                            outBitmap.recycle();
+                        }
+                    }
+
 
                     ExifUtils.save(outputPath, captureDate, exifOrientation, false, null);
 
@@ -541,8 +560,8 @@ public class Cam {
         Camera camera = hasCam ? getCamInstance() : null;
         if (camera != null) {
             try {
-                camera.setPreviewCallback(null);
-                camera.setOneShotPreviewCallback(null);
+//                camera.setPreviewCallback(null);
+//                camera.setOneShotPreviewCallback(null);
                 camera.takePicture(null, callback, callback);
             } catch (Exception ignored) {}
         }

@@ -233,8 +233,9 @@ public class CamView extends ViewGroup implements Cam.OnStateChangeListener, Ori
      * @param outputPath output path the will save.
      * @param callback a callback when it's done.
      */
-    public void capture(String outputPath, final CamView.CaptureCallback callback) {
-        camera.takePicture(callback, outputPath);
+    public void capture(String outputPath, final CamView.CaptureCallback callback,AbstractConfig.ImageFilterInterface filterInterface) {
+        camera.takePicture(callback, outputPath,filterInterface);
+
     }
 
     /**

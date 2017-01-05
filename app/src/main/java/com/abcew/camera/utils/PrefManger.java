@@ -14,7 +14,7 @@ import java.util.Set;
 public class PrefManger<T> {
     private enum TYPE {BOOLEAN, INTEGER, LONG, FLOAT, STRING, STRING_SET, ENUM}
 
-    private static final String PREFERENCES_NAME = "imgLyPreferences";
+    private static final String PREFERENCES_NAME = "imgPreferences";
 
     private static SharedPreferences preferences;
 
