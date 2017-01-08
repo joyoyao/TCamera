@@ -61,7 +61,6 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
 
     private View rootView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
