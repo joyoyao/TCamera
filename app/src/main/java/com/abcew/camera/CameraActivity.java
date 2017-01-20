@@ -153,14 +153,9 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
 
     @Override
     public void onImageCaptured(String outputPath) {
-//        if (intent.getOpenEditor()) {
-//            PhotoEditorIntent editorIntent = new PhotoEditorIntent(intent.getEditorIntent(), this);
-//            editorIntent.setSourceImagePath(outputPath);
-//            editorIntent.setFilter(preview.getFilter());
-//            editorIntent.startActivityForResult(RESULT_EDITOR_DONE);
-//        } else {
-//            setResult(RESULT_OK);
-//        }
+        cameraView.stopPreview(true);
+        cameraView.startPreview();
+
     }
 
     @Override
@@ -190,7 +185,6 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
         Log.i("filePath",filePath);
 
         cameraView.capture(filePath, this,anInterface);
-//        cameraView.onResume();
     }
 
     public void onSwitchCamera(View switchButton) {

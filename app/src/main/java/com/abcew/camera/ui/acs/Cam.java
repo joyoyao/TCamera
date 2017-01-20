@@ -560,8 +560,8 @@ public class Cam {
         Camera camera = hasCam ? getCamInstance() : null;
         if (camera != null) {
             try {
-//                camera.setPreviewCallback(null);
-//                camera.setOneShotPreviewCallback(null);
+                camera.setPreviewCallback(null);
+                camera.setOneShotPreviewCallback(null);
                 camera.takePicture(null, callback, callback);
             } catch (Exception ignored) {}
         }
@@ -719,7 +719,7 @@ public class Cam {
     /**
      * Current Camera state object
      */
-    public class State {
+    public  class State {
         private static final int MAX_FPS = 30000;
 
         @Nullable

@@ -20,7 +20,6 @@ import android.util.Log;
 
 import com.abcew.camera.ImgSdk;
 import com.abcew.camera.ScriptC_image_alpha;
-import com.abcew.camera.ScriptC_image_translate_3d;
 import com.abcew.camera.utils.BitmapFactoryUtils;
 import com.abcew.camera.utils.ThreadUtils;
 
@@ -52,7 +51,6 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
         private ScriptIntrinsic3DLUT lutScript;
 
 
-
         @Nullable
         private ScriptC_image_alpha image_alphacript;
 
@@ -63,6 +61,7 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
 
     private static LruCache<LutColorFilter, Scripts> scriptsLruCache;
     private static final int cacheSize;
+
     static {
         // Get max available VM memory, exceeding this amount will throw an
         // OutOfMemory exception. Stored in kilobytes as LruCache takes an
@@ -81,9 +80,9 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
         };
     }
 
-    private static final int RED_DIM   = 64;
+    private static final int RED_DIM = 64;
     private static final int GREEN_DIM = 64;
-    private static final int BLUE_DIM  = 64;
+    private static final int BLUE_DIM = 64;
 
     private final int[] textures = new int[1];
 
@@ -149,7 +148,6 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
     }
 
 
-
     @Nullable
     @Override
     public Bitmap getThumbnailBitmap(int maxWidth) {
@@ -178,7 +176,7 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
     private ScriptIntrinsic3DLUT getLutRenderScript() {
         Scripts scripts = getScript();
         ScriptIntrinsic3DLUT script = scripts.lutScript == null ? null : scripts.lutScript;
-        if (script == null ) {
+        if (script == null) {
             script = ScriptIntrinsic3DLUT.create(rs, Element.RGBA_8888(rs));
             script.setLUT(getLutCube(rs));
             scripts.lutScript = script;
@@ -228,9 +226,8 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
 //        alphaScript.set_alpha((short) ((255 * intensity)));
 
 
-
         ScriptC_image_alpha image_alphaScript = scripts.image_alphacript == null ? null : scripts.image_alphacript;//.get();
-        if (image_alphaScript == null ) {
+        if (image_alphaScript == null) {
             image_alphaScript = new ScriptC_image_alpha(rs);
             scripts.image_alphacript = image_alphaScript;
             scriptsLruCache.trimToSize(cacheSize);
@@ -281,7 +278,7 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
 
             outputBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
 
-            Allocation mAllocIn  = Allocation.createFromBitmap(rs, bitmap);
+            Allocation mAllocIn = Allocation.createFromBitmap(rs, bitmap);
             Allocation mAllocOut = Allocation.createFromBitmap(rs, outputBitmap);
 
             scriptLut.forEach(mAllocIn, mAllocOut);
@@ -325,6 +322,7 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
 
     /**
      * Return the Lut as Bitmap. Look at the imgly_lut_identity.png drawable to get a basic non changing LUT.
+     *
      * @return a lut to change Image Colors.
      */
     @Nullable
@@ -339,11 +337,12 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
 
     /**
      * Return the Renderscript LUT Allocation
+     *
      * @param rs reference to the renderscript.
      * @return the Lut Allocation
      */
     @NonNull
-    public Allocation getLutCube(@NonNull RenderScript rs){
+    public Allocation getLutCube(@NonNull RenderScript rs) {
         return getLutCube(rs, false);
     }
 
@@ -356,7 +355,7 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
             //Memory Allocation UpKick.
             Thread thread = Thread.currentThread();
             while ((lutBitmap == null || lutBitmap.getWidth() < RED_DIM * 8)) {
-                if(thread.isInterrupted()){
+                if (thread.isInterrupted()) {
                     return null;
                 }
 
@@ -365,28 +364,51 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
                 }
                 lutBitmap = getLutBitmap();
                 try {
-                    Thread.sleep((int)(1000 * Math.random() + 100));
-                } catch (InterruptedException ignored) {}
+                    Thread.sleep((int) (1000 * Math.random() + 100));
+                } catch (InterruptedException ignored) {
+                }
             }
         }
 
-        Bitmap cache = Bitmap.createBitmap(512,512, Bitmap.Config.ARGB_8888);
 
-        Allocation mAllocIn  = Allocation.createFromBitmap(rs, lutBitmap);
-        Allocation mAllocOut = Allocation.createFromBitmap(rs, cache);
-
+//
         final Type.Builder tb = new Type.Builder(rs, Element.U8_4(rs));
         tb.setX(RED_DIM);
         tb.setY(GREEN_DIM);
-        tb.setZ(BLUE_DIM);
+        tb.setZ(GREEN_DIM);
         Allocation mAllocCube = Allocation.createTyped(rs, tb.create());
+//
+//
+//                Bitmap cache = Bitmap.createBitmap(512,512, Bitmap.Config.ARGB_8888);
+//
+//        Allocation mAllocIn  = Allocation.createFromBitmap(rs, lutBitmap);
+//        Allocation mAllocOut = Allocation.createFromBitmap(rs, cache);
+//        ScriptC_image_translate_3d script = new ScriptC_image_translate_3d(rs);
+//        script.set_gIn(mAllocIn);
+//        script.set_gOut(mAllocOut);
+//        script.forEach_root(mAllocIn, mAllocOut);
+////        byte[] lut    = new byte[512 * 512 * 4];
+//        mAllocOut.copyTo(cache);
+//
+//        int[] lut    = new int[512 * 512];
+//        lutBitmap.getPixels(lut, 0, cache.getWidth(), 0, 0, cache.getWidth(), cache.getHeight());
+        int w = lutBitmap.getWidth();
+        int h = lutBitmap.getHeight();
 
-        ScriptC_image_translate_3d script = new ScriptC_image_translate_3d(rs);
-        script.set_gIn(mAllocIn);
-        script.set_gOut(mAllocOut);
-        script.forEach_root(mAllocIn, mAllocOut);
-        byte[] lut    = new byte[512 * 512 * 4];
-        mAllocOut.copyTo(lut);
+        int[] pixels = new int[w * h];
+        int[] lut = new int[w * h];
+        lutBitmap.getPixels(pixels, 0, w, 0, 0, w, h);
+        int i = 0;
+
+        for (int r = 0; r < RED_DIM; r++) {
+            for (int g = 0; g < GREEN_DIM; g++) {
+                for (int b = 0; b < GREEN_DIM; b++) {
+                    int blockX = b % 8;
+                    int blockY = b / 8;
+                    lut[i++] = pixels[(blockY * 64 + g) * 512 + (blockX * 64 + r)];
+                }
+            }
+        }
         mAllocCube.copyFromUnchecked(lut);
         return mAllocCube;
     }
@@ -416,7 +438,7 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
 
             //Bitmap output = getOutputBitmap(source);
 
-            Allocation allocIn    = Allocation.createFromBitmap(rs, source);
+            Allocation allocIn = Allocation.createFromBitmap(rs, source);
             //Allocation allocOut   = Allocation.createFromBitmap(rs, output);
             Allocation allocBlend = Allocation.createFromBitmap(rs, blend);
 
@@ -433,10 +455,10 @@ public class LutColorFilter extends ImageFilter implements ImageFilter.FilterCon
 
             scriptC_image_alpha.set_gIn(allocIn);
             scriptC_image_alpha.set_gOut(allocBlend);
-            scriptC_image_alpha.forEach_setImageAlpha(allocIn,allocBlend);
+            scriptC_image_alpha.forEach_setImageAlpha(allocIn, allocBlend);
             allocBlend.copyTo(blend);
 
-            Log.i("tag","ScriptC_image_alpha");
+            Log.i("tag", "ScriptC_image_alpha");
 //            scriptC_image_alpha.forEach_setImageAlpha();
 //            scriptC_image_alpha.forEach_setImageAlpha(allocBlend);
             //allocOut.copyTo(output);
