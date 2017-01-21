@@ -153,8 +153,13 @@ public class CameraActivity extends AppCompatActivity implements DataSourceListA
 
     @Override
     public void onImageCaptured(String outputPath) {
-        cameraView.stopPreview(true);
-        cameraView.startPreview();
+
+        cameraView.reStartPreview();
+//        cameraView.stopPreview(true);
+//
+////        view.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+//
+//        cameraView.startPreview();
 
     }
 

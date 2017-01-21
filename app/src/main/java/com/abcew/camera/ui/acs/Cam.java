@@ -453,6 +453,7 @@ public class Cam {
             @Override
             public void onPictureTaken(byte[] data, Camera camera) {
                 Cam.this.onPictureTaken(data, this.getOutputPath(),filterInterface);
+//                getState().isRunning=false;
             }
         });
     }
@@ -543,6 +544,10 @@ public class Cam {
      */
     public synchronized void startPreview() {
         stateManager.startPreview();
+    }
+
+    public synchronized void reStartPreview() {
+        stateManager.reStartPreview();
     }
 
     /**
@@ -1085,6 +1090,13 @@ public class Cam {
                 isPreviewWaiting = false;
                 isRunning = true;
             }
+        }
+
+
+        private synchronized void reStartPreview() {
+
+            isRunning=false;
+            startPreview();
         }
 
         private synchronized void stopPreview(boolean release) {

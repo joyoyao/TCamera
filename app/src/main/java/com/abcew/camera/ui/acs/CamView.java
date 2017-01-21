@@ -210,6 +210,23 @@ public class CamView extends ViewGroup implements Cam.OnStateChangeListener, Ori
         preview.startPreview();
     }
 
+    public synchronized void reStartPreview() {
+        post(new Runnable() {
+            @Override
+            public void run() {
+                //preview.onResume();
+                post(new Runnable() {
+                    @Override
+                    public void run() {
+                        camera.reStartPreview();
+                        preview.reStartPreview();
+                    }
+                });
+
+            }
+        });
+    }
+
     /**
      * Set a size change callback.
      * @param sizeChangeListener callback object.
@@ -244,6 +261,8 @@ public class CamView extends ViewGroup implements Cam.OnStateChangeListener, Ori
     public interface Preview {
         void onPause();
         void onResume();
+
+        void reStartPreview();
         void startPreview();
         void onStopPreview();
     }

@@ -69,6 +69,11 @@ public class GlCameraPreview extends GlTextureView implements CamView.Preview, P
     }
 
     @Override
+    public void reStartPreview() {
+        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+    }
+
+    @Override
     public synchronized void startPreview() {
         if (!isInitialized) return;
         queueEvent(new Runnable() {
