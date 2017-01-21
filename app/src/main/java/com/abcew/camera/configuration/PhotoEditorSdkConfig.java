@@ -70,18 +70,11 @@ import java.util.ArrayList;
  * Created by laputan on 16/10/31.
  */
 public class PhotoEditorSdkConfig {
-    private static final String fontAssetsFolder = "fonts/";
-
 //    private static final ArrayList<AbstractConfig.ToolConfigInterface> tools = new ArrayList<>();
     private static final ArrayList<AbstractConfig.FontConfigInterface> fonts = new ArrayList<>();
     private static final ArrayList<AbstractConfig.ImageFilterInterface> filter = new ArrayList<>();
-    private static final ArrayList<AbstractConfig.AspectConfigInterface> aspects = new ArrayList<>();
-    private static final ArrayList<AbstractConfig.StickerConfigInterface> stickers = new ArrayList<>();
     private static final ArrayList<AbstractConfig.ColorConfigInterface> textColors = new ArrayList<>();
     private static final ArrayList<AbstractConfig.ColorConfigInterface> brushColors = new ArrayList<>();
-
-    private static boolean isForceCropCaptureEnabled;
-
     private static SCREEN_ROTATION_MODE cameraScreenRotationMode = SCREEN_ROTATION_MODE.SENSOR_ALWAYS;
     private static SCREEN_ROTATION_MODE editorScreenRotationMode = SCREEN_ROTATION_MODE.SENSOR_WHEN_ROTATION_ENABLED;
 
@@ -151,28 +144,10 @@ public class PhotoEditorSdkConfig {
 
     }
 
-    /**
-     * Change Fontset
-     * <p>
-     * <pre>
-     *  // Step1 get current configuration.
-     * ArrayList&lt;AbstractConfig.FontConfigInterface&gt; fonts = PhotoEditorSdkConfig.getCropConfig();
-     *
-     * // Step2 optional clear it.
-     * fonts.clear();
-     *
-     * // Step3 add the needed fonts
-     * fonts.add(new FontConfig("Geared Slab", fontAssetsFolder + "GearedSlab.ttf"));
-     * </pre>
-     */
-    @NonNull
-    public static ArrayList<AbstractConfig.FontConfigInterface> getFontConfig() {
-        return fonts;
-    }
 
 
     public static boolean isForceCropCaptureEnabled() {
-        return isForceCropCaptureEnabled;
+        return true;
     }
 
 
@@ -205,41 +180,8 @@ public class PhotoEditorSdkConfig {
         return textColors;
     }
 
-    /**
-     * Add a or remove  brush colors @see #getTextColorConfig()
-     * <p>
-     * <pre>
-     * // Step1 get current configuration.
-     * ArrayList&lt;AbstractConfig.ColorConfigInterface&gt; stickers = PhotoEditorSdkConfig.getTextColorConfig();
-     *
-     * // Step2 optional clear it.
-     * stickers.clear();
-     *
-     * // Step3 add the needed textColors
-     * textColors.add(new ColorConfig(R.string.imgly_color_accessibility_name, 0xF4744D));
-     * </pre>
-     */
-    public static ArrayList<AbstractConfig.ColorConfigInterface> getBrushColors() {
-        return brushColors;
-    }
 
-    /**
-     * Set screen rotation mode in editor mode.
-     * Default: #SCREEN_ROTATION_MODE.SENSOR_WHEN_ROTATION_ENABLED
-     * @param mode desired screen mode
-     */
-    public static void setEditorScreenRotationMode(SCREEN_ROTATION_MODE mode) {
-        PhotoEditorSdkConfig.editorScreenRotationMode = mode;
-    }
 
-    /**
-     * Set screen rotation mode in camera mode.
-     * Default: #SCREEN_ROTATION_MODE.SENSOR_ALWAYS
-     * @param mode desired screen mode
-     */
-    public static void setCameraScreenRotationMode(SCREEN_ROTATION_MODE mode) {
-        PhotoEditorSdkConfig.cameraScreenRotationMode = mode;
-    }
 
     public static SCREEN_ROTATION_MODE getCameraScreenRotationMode() {
         return cameraScreenRotationMode;
